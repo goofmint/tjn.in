@@ -2,6 +2,13 @@ class Entry < ActiveRecord::Base
   belongs_to :person
 end
 
+class Comment < ActiveRecord::Base
+  belongs_to :commenter, :class_name => "Person",
+                         :foreign_key => "commenter_id"
+  belongs_to :commentable, :polymorphic => true
+  
+end
+
 class Person < ActiveRecord::Base
   has_many :entries
 end
